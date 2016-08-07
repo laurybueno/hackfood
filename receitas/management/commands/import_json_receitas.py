@@ -11,7 +11,7 @@ class Command(BaseCommand):
     args = 'file'
     help = 'Importar um json de receitas no banco de dados'
 
-    def limpeza(texto):
+    def limpeza(self, texto):
         return texto.replace('\n', '')
 
     @transaction.atomic
@@ -19,10 +19,10 @@ class Command(BaseCommand):
         count = 0
         with open(args[0]) as arq:
 
-            ingredientes = []
-            modo_preparo = []
-
             for obj in json.load(arq):
+                ingredientes = []
+                modo_preparo = []
+                
                 # Itera a lista de ingredientes
                 for ing in obj['ingredientes'].values():
                     ingredientes.append(Ingrediente.objects.get_or_create(
@@ -35,10 +35,10 @@ class Command(BaseCommand):
                         texto=prep
                     )[0])
 
-                titulo = obj['titulo']
+                tit = obj['titulo']
 
                 rec = Receita.objects.create(
-                    titulo=titulo
+                    titulo=self.limpeza(tit)
                 )
 
                 # Associa dados à receita atual
