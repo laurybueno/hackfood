@@ -4,10 +4,26 @@
 		<title>Hackfood</title>
 		<meta charset="UTF-8" />
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<!-- Angular imports -->	
 		<script src="controller/search-ingredient.js"></script>
 	</head>
 	<body ng-app="HackfoodFront" ng-controller="SearchIngredients">
-		<h1>Hackfood</h1>
-		<p>{{hello}}</p>
+		<header class="page-header">
+			<div class="container">
+				<h1>Hackfood</h1>
+				<p>O livro de receitas do solteiro.</p>
+			</div>
+		</header>
+		<main class="container">
+			<form role="form">
+				<div class="form-group">
+					<label for="ingrediente">Então, o que você tem na geladeira?</label>
+					<input type="text" id="ingrediente" class="form-control" ng-model="ingrediente" />
+					<button type="button" class="btn btn-primary" ng-click="pesquisar-receitas()">Pesquisar</button>
+				</div>
+			</form>
+			<p>{{hello}}</p>
+		</main>
 	</body>
 </html>

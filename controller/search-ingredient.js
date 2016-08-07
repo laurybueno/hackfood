@@ -7,6 +7,8 @@ app.controller('SearchIngredients', function($scope){
 		});
 	};
 	
+	$scope.ingredient = 'Pão';
+	
 	$scope.hello = 'Hello, world!';
 	
 });
