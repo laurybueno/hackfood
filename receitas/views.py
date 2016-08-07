@@ -16,30 +16,18 @@ def receitas_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        pass
-        # receitas = []
-        # entrada = request.POST['ingrediente']
-        # ingredientes = []
-        #
-        # for ing in Ingrediente.objects.filter(nome__contains=entrada):
-        #     ingredientes.append(ing)
-        #
-        # for rec in Receita.objects.filter(ingrediente__in=ingredientes):
-        #     receitas.append(rec)
-        #
-        # serializer = ReceitaSerializer(data=receitas)
-        # resposta = {}
-        # # import pdb; pdb.set_trace()
-        # i = 0
-        # serializer.is_valid()
-        # for ser in serializer:
-        #     if ser.is_valid():
-        #         ser.save()
-        #         resposta[i] = ser
-        #     else:
-        #         return JSONResponse(serializer.errors, status=400)
-        #
-        # return JSONResponse(resposta.data, status=201)
+        entrada = request.POST['ingrediente']
+        ingredientes = []
+
+        for ing in Ingrediente.objects.filter(nome__contains=entrada):
+            ingredientes.append(ing)
+
+        receitas = []
+        for rec in Receita.objects.filter(ingrediente__in=ingredientes):
+            receitas.append(rec)
+
+        serializer = ReceitaSerializer(receitas, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
