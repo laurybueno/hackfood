@@ -1,0 +1,17 @@
+body{
+	background-color: AntiqueWhite;
+}
+
+header, .btn{
+	background-color: crimson;
+	color: white;
+}
+
+header{
+	margin-top: 0px !important;
+	padding-top: 2.5%;
+}
+
+.form-control, .btn{
+	margin: 5px;
+}

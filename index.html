@@ -5,6 +5,7 @@
 		<meta charset="UTF-8" />
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/style.css" />
 		<!-- Angular imports -->	
 		<script src="controller/search-ingredient.js"></script>
 	</head>
@@ -19,11 +20,11 @@
 			<form role="form">
 				<div class="form-group">
 					<label for="ingrediente">Então, o que você tem na geladeira?</label>
-					<input type="text" id="ingrediente" class="form-control" ng-model="ingrediente" />
-					<button type="button" class="btn btn-primary" ng-click="pesquisar-receitas()">Pesquisar</button>
+					<input type="text" id="ingrediente" class="form-control" ng-model="ingredient" />
+					<button type="button" class="btn" ng-click="pesquisar-receitas()">Pesquisar</button>
 				</div>
 			</form>
-			<p>{{hello}}</p>
+			<p ng-hide="ingredient == null || ingredient == ''">Clique em 'Pesquisar' para exibir receitas com '{{ingredient}}'.</p>
 		</main>
 	</body>
 </html>
