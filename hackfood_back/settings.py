@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'mptt',
     'polymorphic',
     'PIL',
+    'receitas',
 ]
 
 MIDDLEWARE_CLASSES = [
