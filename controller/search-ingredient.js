@@ -6,7 +6,17 @@ app.controller('SearchIngredients', function($scope){
 			return data;
 		});
 	};
-	
+	$scope.pesquisarReceitas = function(){
+		$http.get("#").then(function (response) {
+			if(response.data.sucesso == true){//se tem receitas
+				$scope.receitas = response.data.receitas;
+			}
+			else{
+				$scope.receitas = -1;
+			}
+  	});
+	}
+
 	$scope.hello = 'Hello, world!';
-	
+
 });
