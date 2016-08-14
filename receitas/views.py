@@ -7,7 +7,7 @@ from receitas.serializers import ReceitaSerializer
 
 
 @csrf_exempt
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def receitas_list(request):
 
     if request.method == 'GET':
@@ -15,19 +15,22 @@ def receitas_list(request):
         serializer = ReceitaSerializer(receitas, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        entrada = request.POST['ingrediente']
-        ingredientes = []
 
-        for ing in Ingrediente.objects.filter(nome__contains=entrada):
-            ingredientes.append(ing)
+@csrf_exempt
+@api_view(['GET'])
+def receitas_busca(request, ingredientes):
 
-        receitas = []
-        for rec in Receita.objects.filter(ingrediente__in=ingredientes):
-            receitas.append(rec)
+    ingredientes = []
 
-        serializer = ReceitaSerializer(receitas, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    for ing in Ingrediente.objects.filter(nome__contains=ingredientes):
+        ingredientes.append(ing)
+
+    receitas = []
+    for rec in Receita.objects.filter(ingrediente__in=ingredientes):
+        receitas.append(rec)
+
+    serializer = ReceitaSerializer(receitas, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
