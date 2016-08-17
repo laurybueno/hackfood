@@ -2,9 +2,12 @@ Django==1.9.9
 Pillow==3.3.0
 Unidecode==0.04.19
 argparse==1.2.1
+dj-database-url==0.4.1
 django-filer==1.2.4
 django-mptt==0.8.5
 django-polymorphic==0.8.1
 djangorestframework==3.4.1
 easy-thumbnails==2.3
+gunicorn==19.6.0
+whitenoise==3.2.1
 wsgiref==0.1.2
