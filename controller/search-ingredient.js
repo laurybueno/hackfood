@@ -1,21 +1,21 @@
-var app = angular.module('HackfoodFront', []);
+var app = angular.module('HackfoodFront', ['ngResource']).factory('Busca', function($resource) {
+  return $resource("http://localhost:8000/api/receitas/busca/:ingredientes/",
+                    {'query': { method: 'GET' }});
+});
 
-app.controller('SearchIngredients', function($scope){
-	$scope.ingredients = function($scope, $http){
-		$http.get('').success(function(data){
-			return data;
-		});
-	};
+app.config(['$resourceProvider', function($resourceProvider) {
+  // Don't strip trailing slashes from calculated URLs
+  $resourceProvider.defaults.stripTrailingSlashes = false;
+}]);
+
+app.controller('SearchIngredients', function($scope, Busca){
+
 	$scope.pesquisarReceitas = function(){
-		$http.get("#").then(function (response) {
-			if(response.data.sucesso == true){//se tem receitas
-				$scope.receitas = response.data.receitas;
-			}
-			else{
-				$scope.receitas = -1;
-			}
-  	});
-	}
+		Busca.query({ ingredientes: $scope.ingredient }, function(busca){
+			console.log(busca);
+		});
+
+	};
 
 	$scope.hello = 'Hello, world!';
 
