@@ -1,1 +1,1 @@
-web: gunicorn hackfood.wsgi --log-file -
+web: gunicorn hackfood_back.wsgi --log-file -
