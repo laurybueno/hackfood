@@ -1,4 +1,5 @@
 /hackfood
+/hackfood_back/staticfiles
 *.pyc
 *.sqlite3*
 *.json
