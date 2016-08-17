@@ -5,6 +5,9 @@ from rest_framework.response import Response
 from receitas.models import Receita, Ingrediente, Preparo
 from receitas.serializers import ReceitaSerializer
 
+cabecalhos = {'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Credentials': 'true',
+              'Access-Control-Expose-Headers': 'FooBar', }
 
 @csrf_exempt
 @api_view(['GET'])
@@ -13,7 +16,7 @@ def receitas_list(request):
     if request.method == 'GET':
         receitas = Receita.objects.all()[:10]
         serializer = ReceitaSerializer(receitas, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, headers=cabecalhos)
 
 
 @csrf_exempt
@@ -30,7 +33,7 @@ def receitas_busca(request, ingredientes):
         receitas.append(rec)
 
     serializer = ReceitaSerializer(receitas, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.data, status=status.HTTP_200_OK, headers=cabecalhos)
 
 
 @api_view(['GET'])
@@ -40,7 +43,7 @@ def receita_detalhe(request, pk):
     try:
         receita = Receita.objects.get(pk=pk)
     except Receita.DoesNotExist:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST, headers=cabecalhos)
 
     serializer = ReceitaSerializer(receita)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.data, status=status.HTTP_200_OK, headers=cabecalhos)
