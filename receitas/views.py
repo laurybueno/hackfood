@@ -23,13 +23,13 @@ def receitas_list(request):
 @api_view(['GET'])
 def receitas_busca(request, ingredientes):
 
-    ingredientes = []
+    ingredientes_banco = []
 
     for ing in Ingrediente.objects.filter(nome__contains=ingredientes):
-        ingredientes.append(ing)
+        ingredientes_banco.append(ing)
 
     receitas = []
-    for rec in Receita.objects.filter(ingrediente__in=ingredientes):
+    for rec in Receita.objects.filter(ingrediente__in=ingredientes_banco):
         receitas.append(rec)
 
     serializer = ReceitaSerializer(receitas, many=True)
