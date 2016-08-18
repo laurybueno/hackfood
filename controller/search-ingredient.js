@@ -11,10 +11,11 @@ app.config(['$resourceProvider', function($resourceProvider) {
 app.controller('SearchIngredients', function($scope, Busca){
 
 	$scope.pesquisarReceitas = function(){
+    $scope.searching = true;
 		Busca.query({ ingredientes: $scope.ingredient }, function(busca){
 			console.log(busca);
 		});
-
+    $scope.searching = false;
 	};
 
 	$scope.hello = 'Hello, world!';

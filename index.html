@@ -1,40 +1,54 @@
-<!doctype html>
-<html>
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE-edge">
-		<title>Hackfood</title>
-		<meta charset="UTF-8" />
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/style.css" />
-		<!-- Angular imports -->
-		<script src="controller/search-ingredient.js"></script>
-	</head>
-	<body ng-app="HackfoodFront" ng-controller="SearchIngredients">
-		<header class="page-header">
-			<div class="container">
-				<h1>Hackfood</h1>
-				<p>O livro de receitas do solteiro.</p>
-			</div>
-		</header>
-		<main class="container">
-			<form role="form">
-				<div class="form-group">
-					<label for="ingrediente">Então, o que você tem na geladeira?</label>
-					<input type="text" id="ingrediente" class="form-control" ng-model="ingredient" />
-					<button type="button" class="btn" ng-click="pesquisarReceitas()">Pesquisar</button>
-				</div>
-			</form>
-			<p ng-hide="ingredient == null || ingredient == ''">Clique em 'Pesquisar' para exibir receitas com '{{ingredient}}'.</p>
-			<div>
-				<ul>
-					<li ng-repeat="x in receitas">
-						{{x.titulo}}
-					</li>
-				</ul>
-				<p ng-show="receitas == -1">Nenhuma receita encontrada.</p>
-			</div>
-		</main>
-	</body>
-</html>
+<html><head>
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Hackfood</title>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <!-- Angular imports -->
+    <script src="controller/search-ingredient.js"></script>
+  </head><body ng-app="HackfoodFront" ng-controller="SearchIngredients">
+    <header class="page-header">
+      <div class="container">
+        <h1>Hackfood</h1>
+        <p>O livro de receitas do solteiro.</p>
+      </div>
+    </header>
+    <div class="section">
+      <div class="container">
+        <div class="row"><div class="col-md-12"><div class="alert alert-dismissable alert-success">
+              <strong>Well done!</strong>You successfully read this important alert message.</div></div></div><div class="row">
+          <div class="col-md-6">
+            <form role="form" class="text-center">
+              <div class="form-group">
+                <input type="text" id="ingrediente" class="form-control" ng-model="ingredient" placeholder="O que você tem na geladeira?">
+                <button type="button" class="btn" ng-click="pesquisarReceitas()" ng-disable="searching">Pesquisar</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+
+            <ul class="lead list-group">
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Morbi leo risus</li>
+              <li class="list-group-item">Porta ac consectetur ac</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</body></html>
