@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/style.css">
     <!-- Angular imports -->
     <script src="controller/search-ingredient.js"></script>
@@ -17,38 +19,63 @@
     </header>
     <div class="section">
       <div class="container">
-        <div class="row"><div class="col-md-12"><div class="alert alert-dismissable alert-success">
-              <strong>Well done!</strong>You successfully read this important alert message.</div></div></div><div class="row">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-dismissable alert-danger" ng-show="receitas_falha">
+              <strong>Ops!</strong> Não encontramos receitas com esse ingrediente.
+              <a href="" class="close" ng-click="receitas_falha=false">&times;</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-md-6">
             <form role="form" class="text-center">
               <div class="form-group">
-                <input type="text" id="ingrediente" class="form-control" ng-model="ingredient" placeholder="O que você tem na geladeira?">
-                <button type="button" class="btn" ng-click="pesquisarReceitas()" ng-disable="searching">Pesquisar</button>
+                <input type="text" id="ingrediente" class="form-control" ng-model="ingrediente" placeholder="O que você tem na geladeira?">
+                <button type="button" class="btn" ng-click="pesquisarReceitas()" ng-disabled="searching">Pesquisar</button>
               </div>
             </form>
           </div>
           <div class="col-md-6">
-
             <ul class="lead list-group">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
-              <li class="list-group-item">Porta ac consectetur ac</li>
-              <li class="list-group-item">Vestibulum at eros</li>
+              <li class="list-group-item" ng-repeat="(id, receita) in receitas_encontradas" data-toggle="modal" data-target="#modal_receita" ng-click="escolher_receita(id)">{{receita.titulo}}</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
+    <div class="modal fade" id="modal_receita">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h2 class="modal-title">{{receita_escolhida.titulo}}</h2>
+          </div>
+          <div class="modal-body">
+            <p class="lead">Ingredientes</p>
+            <table class="table">
+              <tbody>
+                <tr ng-repeat="(num, ingrediente) in receita_escolhida.ingrediente">
+                  <td>{{num + 1}}</td>
+                  <td>{{ingrediente.nome}}</td>
+                </tr>
+              </tbody>
+            </table>
 
+            <p class="lead">Modo de preparo</p>
+            <table class="table">
+              <tbody>
+                <tr ng-repeat="(num, modo) in receita_escolhida.modo_preparo">
+                  <td>{{num + 1}}</td>
+                  <td>{{modo.texto}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
+
 
 
 </body></html>
